@@ -20,7 +20,7 @@ RUN apt-get update -qq \
     && wget http://dl.openfoam.org/ubuntu/dists/trusty/main/binary-amd64/openfoam231_0-1_amd64.deb -O /tmp/openfoam231_0-1_amd64.deb \
     && cp /tmp/openfoam231_0-1_amd64.deb /var/cache/apt/archives/ \
     && make apt-openfoam-deps apt-simphony-deps apt-lammps-deps fix-pip apt-mayavi-deps simphony-env lammps \
-    && source $SIMPHONYENV/bin/activate \
+    && . $SIMPHONYENV/bin/activate \
     && make simphony-common simphony-mayavi simphony-openfoam simphony-liggghts simphony-lammps \
     && rm -rf /var/lib/apt/lists/* \
     && cp -rf /root/OpenFOAM/-2.3.1/platforms/linux64GccDPOpt/lib/* $SIMPHONYENV/lib \
