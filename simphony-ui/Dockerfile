@@ -16,16 +16,24 @@ RUN apt-get update -qq \
     && git clone https://github.com/simphony/simphony-framework.git /tmp/simphony-framework \
     && cd /tmp/simphony-framework \
     && git checkout 0.3.1 \
-    && make deps apt-mayavi-deps venv-prepare \
-    && . $SIMPHONYENV/bin/activate \
-    && make simphony simphony-mayavi \
+    && make base \
+    && wget http://dl.openfoam.org/ubuntu/dists/trusty/main/binary-amd64/openfoam231_0-1_amd64.deb -O /tmp/openfoam231_0-1_amd64.deb \
+    && cp /tmp/openfoam231_0-1_amd64.deb /var/cache/apt/archives/ \
+    && make apt-openfoam-deps apt-simphony-deps apt-lammps-deps fix-pip apt-mayavi-deps simphony-env lammps \
+    && source $SIMPHONYENV/bin/activate \
+    && make simphony-common simphony-mayavi simphony-openfoam simphony-liggghts simphony-lammps \
     && rm -rf /var/lib/apt/lists/* \
     && cp -rf /root/OpenFOAM/-2.3.1/platforms/linux64GccDPOpt/lib/* $SIMPHONYENV/lib \
     && echo ". $SIMPHONYENV/bin/activate" >> /etc/skel/.bashrc \
     && mkdir -p /etc/skel/Desktop /etc/skel/.enthought/mayavi_e3 /etc/skel/.config/openbox \
-    && mv examples /etc/skel/Desktop/ \
     && cd \
     && rm -rf /tmp/simphony-framework \
+    && git clone https://github.com/simphony/simphony-ui /tmp/simphony-ui \
+    && cd /tmp/simphony-ui/ \
+    && git checkout 0.1.0 \
+    && python setup.py install \
+    && cd \
+    && rm -rf /tmp/simphony-ui/ \
     && echo "(eval `cat $SIMPHONYENV/bin/activate` && openfoam_liggghts_ui) &" > /etc/skel/.config/openbox/autostart \
     && chmod 755 /etc/skel/.config/openbox/autostart
 
