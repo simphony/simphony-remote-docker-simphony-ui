@@ -15,7 +15,7 @@ RUN apt-get update -qq \
     && apt-get install -y make git unzip \
     && git clone https://github.com/simphony/simphony-framework.git /tmp/simphony-framework \
     && cd /tmp/simphony-framework \
-    && git checkout 0.3.1 \
+    && git checkout 0.3.2 \
     && make base \
     && wget http://dl.openfoam.org/ubuntu/dists/trusty/main/binary-amd64/openfoam231_0-1_amd64.deb -O /tmp/openfoam231_0-1_amd64.deb \
     && cp /tmp/openfoam231_0-1_amd64.deb /var/cache/apt/archives/ \
