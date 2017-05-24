@@ -30,7 +30,7 @@ RUN apt-get update -qq \
     && rm -rf /tmp/simphony-framework \
     && git clone https://github.com/simphony/simphony-ui /tmp/simphony-ui \
     && cd /tmp/simphony-ui/ \
-    && git checkout 0.1.0 \
+    && git checkout 0.2.0 \
     && python setup.py install \
     && cd \
     && rm -rf /tmp/simphony-ui/ \
