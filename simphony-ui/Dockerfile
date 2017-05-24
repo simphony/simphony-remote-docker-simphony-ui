@@ -33,6 +33,8 @@ RUN apt-get update -qq \
     && cd /tmp/simphony-ui/ \
     && git checkout 0.2.0 \
     && python setup.py install \
+    && mkdir /etc/skel/examples \
+    && cp simphony_ui/tests/fixtures/* /etc/skel/examples/ \
     && cd \
     && rm -rf /tmp/simphony-ui/ \
     && echo "(eval `cat $SIMPHONYENV/bin/activate` && openfoam_liggghts_ui) &" > /etc/skel/.config/openbox/autostart \
